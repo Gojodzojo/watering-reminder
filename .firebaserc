@@ -1,5 +1,14 @@
 {
   "projects": {
     "default": "watering-reminder"
+  },
+  "targets": {
+    "watering-reminder": {
+      "hosting": {
+        "watering-reminder": [
+          "watering-reminder"
+        ]
+      }
+    }
   }
 }
