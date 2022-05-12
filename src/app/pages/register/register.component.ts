@@ -8,6 +8,8 @@ import { AuthService } from 'src/app/services/auth.service'
   styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent {
+  success = false
+
   registerForm = new FormGroup({
     email: new FormControl(''),
     password: new FormControl(''),
@@ -19,6 +21,8 @@ export class RegisterComponent {
   async onSubmit() {
     if (this.registerForm.value.password === this.registerForm.value.confirmPassword) {
       await this.auth.emailRegister(this.registerForm.value.email, this.registerForm.value.password)
+      await this.auth.logout()
+      this.success = true
     }
   }
 }

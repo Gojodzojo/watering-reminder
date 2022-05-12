@@ -1,6 +1,15 @@
-<form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
-    <input type="email" placeholder="Email address" formControlName="email"><br>
-    <input type="password" placeholder="Password" formControlName="password"><br>
-    <input type="password" placeholder="Confirm password" formControlName="confirmPassword"><br>
-    <button type="submit">Register</button>
-</form>
+<div *ngIf="success; then thenBlock else elseBlock"></div>
+
+<ng-template #thenBlock>
+    <p>You have successfully created a new account. Please verify it by clicking the link sent to you by email.</p>
+    <button routerLink="/login">Return to login</button>
+</ng-template>
+
+<ng-template #elseBlock>
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+        <input type="email" placeholder="Email address" formControlName="email"><br>
+        <input type="password" placeholder="Password" formControlName="password"><br>
+        <input type="password" placeholder="Confirm password" formControlName="confirmPassword"><br>
+        <button type="submit">Register</button>
+    </form>
+</ng-template>

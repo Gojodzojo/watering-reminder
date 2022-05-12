@@ -7,7 +7,6 @@ import { RegisterComponent } from './pages/register/register.component'
 import { canActivate, AuthPipeGenerator, emailVerified, loggedIn } from '@angular/fire/auth-guard'
 import { map, pipe, zip } from 'rxjs'
 import { UnverifiedComponent } from './pages/unverified/unverified.component'
-import { RegisteredSuccessfullyComponent } from './pages/registered-successfully/registered-successfully.component'
 
 const loggedInVerifiedUser: AuthPipeGenerator = () => (
   map(user => {
@@ -34,7 +33,6 @@ const loggedOutUser: AuthPipeGenerator = () => (
 )
 
 const routes: Routes = [
-  { path: 'registered-successfully', component: RegisteredSuccessfullyComponent },
   { path: 'dashboard', component: DashboardComponent, ...canActivate(loggedInVerifiedUser) },
   { path: 'login', component: LoginComponent, ...canActivate(loggedOutUser) },
   { path: 'register', component: RegisterComponent, ...canActivate(loggedOutUser) },

@@ -12,12 +12,11 @@ import { provideFirestore, getFirestore } from '@angular/fire/firestore'
 import { provideMessaging, getMessaging } from '@angular/fire/messaging'
 import { USE_EMULATOR } from '@angular/fire/compat/auth'
 import { SETTINGS } from '@angular/fire/compat/firestore'
-import { LoginComponent } from './pages/login/login.component';
-import { RegisterComponent } from './pages/register/register.component';
-import { IndexComponent } from './pages/index/index.component';
-import { DashboardComponent } from './pages/dashboard/dashboard.component';
-import { UnverifiedComponent } from './pages/unverified/unverified.component';
-import { RegisteredSuccessfullyComponent } from './pages/registered-successfully/registered-successfully.component'
+import { LoginComponent } from './pages/login/login.component'
+import { RegisterComponent } from './pages/register/register.component'
+import { IndexComponent } from './pages/index/index.component'
+import { DashboardComponent } from './pages/dashboard/dashboard.component'
+import { UnverifiedComponent } from './pages/unverified/unverified.component'
 
 @NgModule({
   declarations: [
@@ -27,7 +26,6 @@ import { RegisteredSuccessfullyComponent } from './pages/registered-successfully
     IndexComponent,
     DashboardComponent,
     UnverifiedComponent,
-    RegisteredSuccessfullyComponent,
   ],
   imports: [
     BrowserModule,

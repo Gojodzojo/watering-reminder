@@ -37,7 +37,6 @@ export class AuthService {
   async emailRegister(email: string, password: string) {
     const credential = await createUserWithEmailAndPassword(this.auth, email, password)
     await sendEmailVerification(credential.user)
-    await this.router.navigate(['/registered-successfully'])
   }
 
   async sendEmailVerification() {
