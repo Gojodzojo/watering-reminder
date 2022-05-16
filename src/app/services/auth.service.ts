@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core'
-import { Auth, signInWithEmailAndPassword, FacebookAuthProvider, GoogleAuthProvider, signInWithPopup, User, user, sendEmailVerification, createUserWithEmailAndPassword, applyActionCode } from '@angular/fire/auth'
+import { Auth, signInWithEmailAndPassword, FacebookAuthProvider, GoogleAuthProvider, signInWithPopup, User, user, sendEmailVerification, createUserWithEmailAndPassword, applyActionCode, sendPasswordResetEmail } from '@angular/fire/auth'
 import { Router } from '@angular/router'
 import { Observable } from 'rxjs'
 
@@ -56,5 +56,9 @@ export class AuthService {
 
   async logout() {
     await this.auth.signOut()
+  }
+
+  async sendPasswordResetEmail(email: string) {
+    await sendPasswordResetEmail(this.auth, email)
   }
 }

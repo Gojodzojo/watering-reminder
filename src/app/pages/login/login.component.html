@@ -1,12 +1,15 @@
 <h1>Login with email</h1>
+
 <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
     <input type="email" placeholder="Email" formControlName="email" /><br>
     <input type="password" placeholder="Password" formControlName="password" /><br>
     <button type="submit">Login</button>
 </form>
+
+<button routerLink="/forgot-password">Forgot Password</button><br>
 <button routerLink="/register">Create a new account</button>
 
 <hr>
 
-<button (click)="auth.googleSignin()">Login with google</button>
-<button (click)="auth.facebookSignin()">Login with facebook</button>
+<button (click)="auth.googleSignin()">Login with Google</button><br>
+<button (click)="auth.facebookSignin()">Login with Facebook</button>

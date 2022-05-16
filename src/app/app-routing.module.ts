@@ -4,9 +4,10 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component'
 import { IndexComponent } from './pages/index/index.component'
 import { LoginComponent } from './pages/login/login.component'
 import { RegisterComponent } from './pages/register/register.component'
-import { canActivate, AuthPipeGenerator, emailVerified, loggedIn } from '@angular/fire/auth-guard'
-import { map, pipe, zip } from 'rxjs'
+import { canActivate, AuthPipeGenerator } from '@angular/fire/auth-guard'
+import { map } from 'rxjs'
 import { UnverifiedComponent } from './pages/unverified/unverified.component'
+import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password.component'
 
 const loggedInVerifiedUser: AuthPipeGenerator = () => (
   map(user => {
@@ -36,6 +37,7 @@ const routes: Routes = [
   { path: 'dashboard', component: DashboardComponent, ...canActivate(loggedInVerifiedUser) },
   { path: 'login', component: LoginComponent, ...canActivate(loggedOutUser) },
   { path: 'register', component: RegisterComponent, ...canActivate(loggedOutUser) },
+  { path: 'forgot-password', component: ForgotPasswordComponent, ...canActivate(loggedOutUser) },
   { path: 'unverified', component: UnverifiedComponent, ...canActivate(loggedInUnverifiedUser) },
   { path: '', component: IndexComponent, ...canActivate(loggedOutUser) },
   { path: '**', redirectTo: '' }

@@ -16,7 +16,8 @@ import { LoginComponent } from './pages/login/login.component'
 import { RegisterComponent } from './pages/register/register.component'
 import { IndexComponent } from './pages/index/index.component'
 import { DashboardComponent } from './pages/dashboard/dashboard.component'
-import { UnverifiedComponent } from './pages/unverified/unverified.component'
+import { UnverifiedComponent } from './pages/unverified/unverified.component';
+import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password.component'
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { UnverifiedComponent } from './pages/unverified/unverified.component'
     IndexComponent,
     DashboardComponent,
     UnverifiedComponent,
+    ForgotPasswordComponent,
   ],
   imports: [
     BrowserModule,
