@@ -17,7 +17,10 @@ import { RegisterComponent } from './pages/register/register.component'
 import { IndexComponent } from './pages/index/index.component'
 import { DashboardComponent } from './pages/dashboard/dashboard.component'
 import { UnverifiedComponent } from './pages/unverified/unverified.component';
-import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password.component'
+import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password.component';
+import { ActionComponent } from './pages/action/action.component';
+import { PasswordResetComponent } from './pages/action/modes/password-reset/password-reset.component';
+import { EmailVerificationComponent } from './pages/action/modes/email-verification/email-verification.component'
 
 @NgModule({
   declarations: [
@@ -28,6 +31,9 @@ import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password
     DashboardComponent,
     UnverifiedComponent,
     ForgotPasswordComponent,
+    ActionComponent,
+    PasswordResetComponent,
+    EmailVerificationComponent,
   ],
   imports: [
     BrowserModule,

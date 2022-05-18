@@ -1,0 +1,17 @@
+<ng-container [ngSwitch]="status">
+    <div *ngSwitchCase="Status.Success">
+        <h1>Success</h1>
+        <p>Your email has been successfully verified</p>
+        <button routerLink="/login">Go to login</button>
+    </div>
+
+    <div *ngSwitchCase="Status.Error">
+        <h1>Error</h1>
+        <p>No communication with server.</p>
+        <button (click)="verify()">Try agin</button>
+    </div>
+
+    <div *ngSwitchDefault>
+        <p>Loading</p>
+    </div>
+</ng-container>

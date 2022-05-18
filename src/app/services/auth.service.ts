@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core'
-import { Auth, signInWithEmailAndPassword, FacebookAuthProvider, GoogleAuthProvider, signInWithPopup, User, user, sendEmailVerification, createUserWithEmailAndPassword, applyActionCode, sendPasswordResetEmail } from '@angular/fire/auth'
+import { Auth, signInWithEmailAndPassword, FacebookAuthProvider, GoogleAuthProvider, signInWithPopup, User, user, sendEmailVerification, createUserWithEmailAndPassword, applyActionCode, sendPasswordResetEmail, checkActionCode, confirmPasswordReset } from '@angular/fire/auth'
 import { Router } from '@angular/router'
 import { Observable } from 'rxjs'
 
@@ -47,6 +47,14 @@ export class AuthService {
 
   async applyActionCode(oobCode: string) {
     await applyActionCode(this.auth, oobCode)
+  }
+
+  async checkActionCode(oobCode: string) {
+    return await checkActionCode(this.auth, oobCode)
+  }
+
+  async confirmPasswordReset(oobCode: string, newPassword: string) {
+    await confirmPasswordReset(this.auth, oobCode, newPassword)
   }
 
   // For debug purposes
