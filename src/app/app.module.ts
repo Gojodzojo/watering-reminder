@@ -16,10 +16,10 @@ import { LoginComponent } from './pages/login/login.component'
 import { RegisterComponent } from './pages/register/register.component'
 import { IndexComponent } from './pages/index/index.component'
 import { DashboardComponent } from './pages/dashboard/dashboard.component'
-import { UnverifiedComponent } from './pages/unverified/unverified.component';
-import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password.component';
-import { ActionComponent } from './pages/action/action.component';
-import { PasswordResetComponent } from './pages/action/modes/password-reset/password-reset.component';
+import { UnverifiedComponent } from './pages/unverified/unverified.component'
+import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password.component'
+import { ActionComponent } from './pages/action/action.component'
+import { PasswordResetComponent } from './pages/action/modes/password-reset/password-reset.component'
 import { EmailVerificationComponent } from './pages/action/modes/email-verification/email-verification.component'
 
 @NgModule({
@@ -50,18 +50,6 @@ import { EmailVerificationComponent } from './pages/action/modes/email-verificat
     provideAuth(() => getAuth()),
     provideFirestore(() => getFirestore()),
     provideMessaging(() => getMessaging())
-  ],
-  providers: [{
-    provide: USE_EMULATOR,
-    useValue: environment.production ? undefined : ["localhost", 9099]
-  },
-  {
-    provide: SETTINGS,
-    useValue: environment.production ? {} : {
-      host: 'localhost:8080',
-      ssl: false,
-    }
-  }
   ],
   bootstrap: [AppComponent]
 })
