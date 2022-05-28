@@ -13,25 +13,18 @@ export class AuthService {
     this.user$ = user(auth)
   }
 
-  private async navigateToDashboard() {
-    await this.router.navigate(['/dashboard'])
-  }
-
   async googleSignin() {
     const provider = new GoogleAuthProvider()
     await signInWithPopup(this.auth, provider)
-    await this.navigateToDashboard()
   }
 
   async facebookSignin() {
     const provider = new FacebookAuthProvider()
     await signInWithPopup(this.auth, provider)
-    await this.navigateToDashboard()
   }
 
   async emailLogin(email: string, password: string) {
     await signInWithEmailAndPassword(this.auth, email, password)
-    await this.navigateToDashboard()
   }
 
   async emailRegister(email: string, password: string) {

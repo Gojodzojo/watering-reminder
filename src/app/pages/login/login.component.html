@@ -1,9 +1,33 @@
 <h1>Login with email</h1>
 
 <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-    <input type="email" placeholder="Email" formControlName="email" /><br>
-    <input type="password" placeholder="Password" formControlName="password" /><br>
-    <button type="submit">Login</button>
+    <input type="email" placeholder="Email" formControlName="email" required email /><br>
+    <input type="password" placeholder="Password" formControlName="password" required minlength="6"
+        maxlength="20" /><br>
+
+    <div *ngIf="status === Status.Loading">
+        Loading
+    </div>
+
+    <div *ngIf="status === Status.Error && error !== null" [ngSwitch]="error.code">
+        <div *ngSwitchCase="'auth/user-not-found'">
+            User not found.
+        </div>
+
+        <div *ngSwitchCase="'auth/wrong-password'">
+            Wrong password.
+        </div>
+
+        <div *ngSwitchCase="'auth/network-request-failed'">
+            Network request failed.
+        </div>
+
+        <div *ngSwitchDefault>
+            {{errorCodeToMessage()}}
+        </div>
+    </div>
+
+    <button type="submit" [disabled]="loginForm.invalid">Login</button>
 </form>
 
 <button routerLink="/forgot-password">Forgot Password</button><br>
@@ -11,5 +35,5 @@
 
 <hr>
 
-<button (click)="auth.googleSignin()">Login with Google</button><br>
-<button (click)="auth.facebookSignin()">Login with Facebook</button>
+<button (click)="googleSignin()">Login with Google</button><br>
+<button (click)="facebookSignin()">Login with Facebook</button>

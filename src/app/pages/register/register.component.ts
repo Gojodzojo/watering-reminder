@@ -1,6 +1,14 @@
 import { Component } from '@angular/core'
 import { FormControl, FormGroup } from '@angular/forms'
+import errorCodeToMessage from 'src/app/scripts/errorCodeToMessage'
 import { AuthService } from 'src/app/services/auth.service'
+
+enum Status {
+  WaitingForInput,
+  Loading,
+  Error,
+  Success
+}
 
 @Component({
   selector: 'app-register',
@@ -8,7 +16,9 @@ import { AuthService } from 'src/app/services/auth.service'
   styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent {
-  success = false
+  Status = Status
+  status = Status.WaitingForInput
+  error: any = null
 
   registerForm = new FormGroup({
     email: new FormControl(''),
@@ -19,10 +29,32 @@ export class RegisterComponent {
   constructor(public auth: AuthService) { }
 
   async onSubmit() {
-    if (this.registerForm.value.password === this.registerForm.value.confirmPassword) {
-      await this.auth.emailRegister(this.registerForm.value.email, this.registerForm.value.password)
-      await this.auth.logout()
-      this.success = true
+    console.log(this.registerForm.valid)
+    console.log(this.passordsAreEqual)
+
+    if (this.registerForm.valid && this.passordsAreEqual) {
+      try {
+        this.status = Status.Loading
+        await this.auth.emailRegister(this.registerForm.value.email, this.registerForm.value.password)
+        await this.auth.logout()
+        this.status = Status.Success
+      } catch (error) {
+        console.error(error)
+        this.status = Status.Error
+        this.error = error
+      }
     }
+  }
+
+  isControlModified(controlName: string) {
+    return this.registerForm.controls[controlName].dirty || this.registerForm.controls[controlName].touched
+  }
+
+  get errorMessage() {
+    return errorCodeToMessage(this.error.code)
+  }
+
+  get passordsAreEqual() {
+    return this.registerForm.value.password === this.registerForm.value.confirmPassword
   }
 }
