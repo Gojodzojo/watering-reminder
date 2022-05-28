@@ -29,9 +29,6 @@ export class RegisterComponent {
   constructor(public auth: AuthService) { }
 
   async onSubmit() {
-    console.log(this.registerForm.valid)
-    console.log(this.passordsAreEqual)
-
     if (this.registerForm.valid && this.passordsAreEqual) {
       try {
         this.status = Status.Loading
