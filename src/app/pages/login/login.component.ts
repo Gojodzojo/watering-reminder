@@ -42,7 +42,6 @@ export class LoginComponent {
         console.error(error)
         this.status = Status.Error
         this.error = error
-        console.log(this.error.code)
       }
     }
   }
