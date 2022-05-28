@@ -107,6 +107,16 @@
             ],
             "scripts": []
           }
+        },
+        "deploy": {
+          "builder": "@angular/fire:deploy",
+          "options": {
+            "prerender": false,
+            "ssr": false,
+            "browserTarget": "watering-reminder:build:production",
+            "firebaseProject": "watering-reminder",
+            "firebaseHostingSite": "watering-reminder"
+          }
         }
       }
     }

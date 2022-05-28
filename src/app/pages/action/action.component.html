@@ -1,0 +1,19 @@
+<ng-container [ngSwitch]="mode">
+    <div *ngSwitchCase="Mode.Error">
+        <h1>Error</h1>
+        <p>The link has expired or it has already been used</p>
+    </div>
+
+    <div *ngSwitchCase="Mode.EmailVerification">
+        <app-email-verification></app-email-verification>
+    </div>
+
+    <div *ngSwitchCase="Mode.PasswordReset">
+        <app-password-reset></app-password-reset>
+    </div>
+
+    <div *ngSwitchDefault>
+        <p>Loading</p>
+    </div>
+
+</ng-container>
