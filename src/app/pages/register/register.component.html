@@ -36,7 +36,7 @@
             </div>
         </div>
 
-        <div *ngIf="isControlModified('confirmPassword') && passordsAreEqual">
+        <div *ngIf="isControlModified('confirmPassword') && !passordsAreEqual">
             Passwords do not match.
         </div>
 
@@ -52,6 +52,10 @@
             <div *ngSwitchDefault>
                 {{errorMessage}}
             </div>
+        </div>
+
+        <div *ngIf="status === Status.Loading">
+            Loading.
         </div>
 
         <button type="submit" [disabled]="registerForm.invalid || !passordsAreEqual">
