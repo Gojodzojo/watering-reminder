@@ -14,8 +14,8 @@ The ui for this project is built with Angular. The ui will be designed using Fig
 
 | Task                                                             |          Status |
 |------------------------------------------------------------------|----------------:|
-| Create a login and registration page.                            |     In progress |
-| Create page to manage your plants.                               | Not yet started |
+| Create a login and registration page.                            |            Done |
+| Create page to manage your plants.                               |     In progress |
 | Create scheduled functions on backend to send push notifications | Not yet started |
 | Design ui in Figma                                               | Not yet started |
 | Apply styles to application                                      | Not yet started |
