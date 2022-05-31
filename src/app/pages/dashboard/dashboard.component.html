@@ -8,7 +8,7 @@
 </ng-template>
 
 <ng-template #loadedBlock>
-    <div *ngIf="plantsAreEmpty$ | async; then plantsEmptyBlock else plantsNotEmptyBlock"></div>
+    <div *ngIf="plantsService.plantsAreEmpty$ | async; then plantsEmptyBlock else plantsNotEmptyBlock"></div>
 
     <ng-template #plantsEmptyBlock>
         <p>You have no plants.</p>
@@ -17,11 +17,11 @@
 
     <ng-template #plantsNotEmptyBlock>
         <button routerLink="/add-plant">Add a plant</button>
-        <div *ngFor="let plant of plant$ | async">
+        <div *ngFor="let plant of plantsService.plants$ | async">
             <h3>{{ plant.name }}</h3>
             <p>{{ plant.description }} {{ plant.waterTime }}</p>
+            <button (click)="plantsService.deletePlant(plant.id)">Delete</button>
             <hr>
-            <!-- <button (click)="deletePlant(plant.id)">Delete</button> -->
         </div>
     </ng-template>
 </ng-template>

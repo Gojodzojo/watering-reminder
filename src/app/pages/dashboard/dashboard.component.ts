@@ -3,7 +3,8 @@ import { collection, collectionData, Firestore, addDoc, CollectionReference } fr
 import { Router } from '@angular/router'
 import { lastValueFrom, map, Observable, of, take } from 'rxjs'
 import { Plant } from 'src/app/models/plant.model'
-import { AuthService } from 'src/app/services/auth.service'
+import { AuthService } from 'src/app/services/auth/auth.service'
+import { PlantsService } from 'src/app/services/plants-service/plants.service'
 
 @Component({
   selector: 'app-dashboard',
@@ -11,27 +12,10 @@ import { AuthService } from 'src/app/services/auth.service'
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent {
-  plant$: Observable<Plant[]> = of([])
-  plantsAreEmpty$ = of(true)
   isLoading = true
 
-  constructor(public auth: AuthService, public router: Router, public firestore: Firestore) {
-    this.auth.user$.subscribe(user => {
-      if (user) {
-        const c = collection(this.firestore, "users", user.uid, "plants") as CollectionReference<Plant>
-        this.plant$ = collectionData(c, { idField: "id" })
-        this.plantsAreEmpty$ = this.plant$.pipe(map(plants => plants.length === 0))
-        this.plant$.subscribe(() => this.isLoading = false)
-      } else {
-        this.router.navigate(['/login'])
-      }
-    })
-  }
-
-  async addPlant(plant: Plant) {
-    const user = await lastValueFrom(this.auth.user$.pipe(take(1)))
-    const c = collection(this.firestore, "users", user!.uid, "plants") as CollectionReference<Plant>
-    await addDoc(c, plant)
+  constructor(public auth: AuthService, public router: Router, public plantsService: PlantsService) {
+    this.plantsService.plants$.subscribe(() => this.isLoading = false)
   }
 
   async logout() {
