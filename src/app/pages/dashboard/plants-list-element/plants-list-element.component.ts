@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core'
 import { Plant } from 'src/app/models/plant.model'
-import { PlantsService } from 'src/app/services/plants-service/plants.service'
+import { PlantsService } from 'src/app/services/plants/plants.service'
 
 enum DeleteState {
   WaitingForInput,
