@@ -17,11 +17,7 @@
 
     <ng-template #plantsNotEmptyBlock>
         <button routerLink="/add-plant">Add a plant</button>
-        <div *ngFor="let plant of plantsService.plants$ | async">
-            <h3>{{ plant.name }}</h3>
-            <p>{{ plant.description }} {{ plant.waterTime }}</p>
-            <button (click)="plantsService.deletePlant(plant.id)">Delete</button>
-            <hr>
-        </div>
+        <app-plants-list-element *ngFor="let plant of plantsService.plants$ | async" [plant]="plant">
+        </app-plants-list-element>
     </ng-template>
 </ng-template>

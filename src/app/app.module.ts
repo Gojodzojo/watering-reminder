@@ -18,7 +18,8 @@ import { UnverifiedComponent } from './pages/unverified/unverified.component'
 import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password.component'
 import { ActionComponent } from './pages/action/action.component'
 import { PasswordResetComponent } from './pages/action/modes/password-reset/password-reset.component'
-import { EmailVerificationComponent } from './pages/action/modes/email-verification/email-verification.component'
+import { EmailVerificationComponent } from './pages/action/modes/email-verification/email-verification.component';
+import { PlantsListElementComponent } from './pages/dashboard/plants-list-element/plants-list-element.component'
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { EmailVerificationComponent } from './pages/action/modes/email-verificat
     ActionComponent,
     PasswordResetComponent,
     EmailVerificationComponent,
+    PlantsListElementComponent,
   ],
   imports: [
     BrowserModule,
