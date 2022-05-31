@@ -1,3 +1,27 @@
 <p>dashboard works!</p>
 <button (click)="logout()">Logout</button>
-<button (click)="auth.logUser()">Log user</button>
+
+<div *ngIf="isLoading; then loadingBlock else loadedBlock"></div>
+
+<ng-template #loadingBlock>
+    <p>Loading</p>
+</ng-template>
+
+<ng-template #loadedBlock>
+    <div *ngIf="plantsAreEmpty$ | async; then plantsEmptyBlock else plantsNotEmptyBlock"></div>
+
+    <ng-template #plantsEmptyBlock>
+        <p>You have no plants.</p>
+        <button routerLink="/add-plant">Add your first plant</button>
+    </ng-template>
+
+    <ng-template #plantsNotEmptyBlock>
+        <button routerLink="/add-plant">Add a plant</button>
+        <div *ngFor="let plant of plant$ | async">
+            <h3>{{ plant.name }}</h3>
+            <p>{{ plant.description }} {{ plant.waterTime }}</p>
+            <hr>
+            <!-- <button (click)="deletePlant(plant.id)">Delete</button> -->
+        </div>
+    </ng-template>
+</ng-template>
