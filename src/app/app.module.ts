@@ -18,8 +18,12 @@ import { UnverifiedComponent } from './pages/unverified/unverified.component'
 import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password.component'
 import { ActionComponent } from './pages/action/action.component'
 import { PasswordResetComponent } from './pages/action/modes/password-reset/password-reset.component'
-import { EmailVerificationComponent } from './pages/action/modes/email-verification/email-verification.component';
+import { EmailVerificationComponent } from './pages/action/modes/email-verification/email-verification.component'
 import { PlantsListElementComponent } from './pages/dashboard/plants-list-element/plants-list-element.component'
+import { AddPlantComponent } from './pages/add-plant/add-plant.component'
+import { PlantFormComponent } from './plant-form/plant-form.component'
+import { ImageCropperModule } from 'ngx-image-cropper'
+import { getStorage, provideStorage } from '@angular/fire/storage'
 
 @NgModule({
   declarations: [
@@ -34,12 +38,15 @@ import { PlantsListElementComponent } from './pages/dashboard/plants-list-elemen
     PasswordResetComponent,
     EmailVerificationComponent,
     PlantsListElementComponent,
+    AddPlantComponent,
+    PlantFormComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
+    ImageCropperModule,
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: environment.production,
       // Register the ServiceWorker as soon as the application is stable
@@ -49,7 +56,8 @@ import { PlantsListElementComponent } from './pages/dashboard/plants-list-elemen
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
     provideFirestore(() => getFirestore()),
-    provideMessaging(() => getMessaging())
+    provideMessaging(() => getMessaging()),
+    provideStorage(() => getStorage()),
   ],
   bootstrap: [AppComponent]
 })

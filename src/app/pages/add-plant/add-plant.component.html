@@ -1,0 +1,14 @@
+<app-plant-form [formGroup]="form" [(imageDataUrl)]="imageDataUrl" [(isCropping)]="isCropping"></app-plant-form>
+<br>
+<button [disabled]="!canAddPlant" (click)="addPlant()">Add plant</button>
+<button routerLink="/dashboard">Cancel</button>
+<br>
+<div [ngSwitch]="addPlantState">
+    <div *ngSwitchCase="AddPlantState.Loading">
+        Loading
+    </div>
+
+    <div *ngSwitchCase="AddPlantState.Error">
+        <p>Error adding plant</p>
+    </div>
+</div>
