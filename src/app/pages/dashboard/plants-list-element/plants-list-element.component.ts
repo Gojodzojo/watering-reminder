@@ -24,7 +24,7 @@ export class PlantsListElementComponent {
   async deletePlant() {
     try {
       this.deleteState = DeleteState.Loading
-      await this.plantsService.deletePlant(this.plant.id)
+      await this.plantsService.deletePlant(this.plant.id, !!this.plant.imageDataUrl)
     }
     catch (e) {
       this.deleteState = DeleteState.Error

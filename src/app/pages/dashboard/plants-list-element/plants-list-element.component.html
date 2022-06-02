@@ -1,7 +1,8 @@
 <h3>{{ plant.name }}</h3>
 <p>{{ plant.description }} {{ plant.waterTime }}</p>
-<button (click)="plantsService.deletePlant(plant.id)">Delete</button>
+<button (click)="deletePlant()">Delete</button>
 <p *ngIf="deleteState === DeleteState.Loading">Loading</p>
 <p *ngIf="deleteState === DeleteState.Error">Could not delete plant</p>
 <button [routerLink]="'/edit-plant/' + plant.id">Edit</button>
+<img [src]="plant.imageDataUrl ? plant.imageDataUrl : 'assets/images/default_plant_image.png'" alt="plant image">
 <hr>
