@@ -1,6 +1,6 @@
 # Copied from https://mdabdulhalimrafi.medium.com/automate-firebase-functions-deployment-with-github-actions-ci-a0eb10fa308d
 
-name: Firebase function deploy
+name: Deploy everything to Firebase
 on:
   push:
     branches: 
@@ -12,11 +12,13 @@ jobs:
     - uses: actions/checkout@v2
     - name: Install npm packages
       run: |
+        npm ci 
+        npm run build
         cd functions
         npm install
     - name:  Deploy to Firebase
       uses: w9jds/firebase-action@master
       with:
-          args: deploy --only functions
+          args: deploy
       env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
