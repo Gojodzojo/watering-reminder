@@ -4,7 +4,7 @@ export interface Plant {
     description: string
     timezone: string
     waterTime: string
-    imageDataUrl: string
+    imageUrl: string
 }
 
-export type PlantWithoutImage = Omit<Plant, 'imageDataUrl'>
+export type PlantWithoutImage = Omit<Plant, 'imageUrl'>

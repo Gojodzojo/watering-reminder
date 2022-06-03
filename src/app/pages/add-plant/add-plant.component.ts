@@ -23,7 +23,7 @@ export class AddPlantComponent {
     timezone: new FormControl(Intl.DateTimeFormat().resolvedOptions().timeZone, Validators.required),
     waterTime: new FormControl('', Validators.required),
   })
-  imageDataUrl = ''
+  imageUrl = ''
   isCropping = false
   addPlantState = AddPlantState.WaitingForInput
 
@@ -33,10 +33,7 @@ export class AddPlantComponent {
     if (this.canAddPlant) {
       try {
         this.addPlantState = AddPlantState.Loading
-        await this.plantsService.addPlant({
-          ...this.form.value,
-          imageDataUrl: this.imageDataUrl
-        })
+        await this.plantsService.addPlant(this.form.value, this.imageUrl)
         await this.router.navigate(['/dashboard'])
       } catch (error) {
         console.error(error)

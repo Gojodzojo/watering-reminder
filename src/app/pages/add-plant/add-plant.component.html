@@ -1,4 +1,4 @@
-<app-plant-form [formGroup]="form" [(imageDataUrl)]="imageDataUrl" [(isCropping)]="isCropping"></app-plant-form>
+<app-plant-form [formGroup]="form" [(imageUrl)]="imageUrl" [(isCropping)]="isCropping"></app-plant-form>
 <br>
 <button [disabled]="!canAddPlant" (click)="addPlant()">Add plant</button>
 <button routerLink="/dashboard">Cancel</button>

@@ -5,7 +5,7 @@
 </ng-template>
 
 <ng-template #formBlock>
-    <app-plant-form [formGroup]="form" [(imageDataUrl)]="imageDataUrl" [(isCropping)]="isCropping"></app-plant-form>
+    <app-plant-form [formGroup]="form" [(imageUrl)]="imageUrl" [(isCropping)]="isCropping"></app-plant-form>
     <br>
     <button [disabled]="!canUpdatePlant" (click)="updatePlant()">Update plant</button>
     <button (click)="deletePlant()">Delete plant</button>

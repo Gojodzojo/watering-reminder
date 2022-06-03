@@ -43,8 +43,8 @@
                 <input type="file" accept="image/*" (change)="fileChangeEvent($event)" style="display: none">
             </label>
         </button>
-        <button *ngIf="imageDataUrl" (click)="clearImage()">Clear image</button><br>
-        <img [src]="imageDataUrl ? imageDataUrl : 'assets/images/default_plant_image.png'" />
+        <button *ngIf="imageUrl" (click)="clearImage()">Clear image</button><br>
+        <img [src]="imageUrl ? imageUrl : 'assets/images/default_plant_image.png'" />
     </div>
 
 

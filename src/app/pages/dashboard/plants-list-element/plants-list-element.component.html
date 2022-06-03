@@ -4,5 +4,5 @@
 <p *ngIf="deleteState === DeleteState.Loading">Loading</p>
 <p *ngIf="deleteState === DeleteState.Error">Could not delete plant</p>
 <button [routerLink]="'/edit-plant/' + plant.id">Edit</button>
-<img [src]="plant.imageDataUrl ? plant.imageDataUrl : 'assets/images/default_plant_image.png'" alt="plant image">
+<img [src]="plant.imageUrl ? plant.imageUrl : 'assets/images/default_plant_image.png'" alt="plant image">
 <hr>

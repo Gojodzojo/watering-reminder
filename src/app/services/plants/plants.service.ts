@@ -17,23 +17,8 @@ export class PlantsService {
     this.plants$ = this.auth.user$.pipe(
       switchMap((user) => {
         if (user) {
-          const c = collection(this.firestore, "users", user.uid, "plants") as CollectionReference<PlantWithoutImage>
-          const plantsWithoutImage = collectionData(c, { idField: "id" })
-
-          return plantsWithoutImage.pipe(
-            switchMap(plants => {
-              const plantsPromise = plants.map(async (plant) => {
-                const imageRef = ref(this.storage, `users/${user.uid}/plants/${plant.id}`)
-                let imageDataUrl = ''
-                try {
-                  imageDataUrl = await getDownloadURL(imageRef)
-                } catch (e) { }
-                return { ...plant, imageDataUrl }
-              })
-
-              return from(Promise.all(plantsPromise))
-            })
-          )
+          const c = collection(this.firestore, "users", user.uid, "plants") as CollectionReference<Plant>
+          return collectionData(c, { idField: "id" })
         }
         return of([])
       })
@@ -42,19 +27,23 @@ export class PlantsService {
     this.plantsAreEmpty$ = this.plants$.pipe(map(plants => plants.length === 0))
   }
 
-  async addPlant({ imageDataUrl, ...plantWithoutImage }: Plant) {
+  async addPlant(plantWithoutImage: PlantWithoutImage, imageDataUrl: string) {
     const user = await lastValueFrom(this.auth.user$.pipe(take(1)))
 
     if (user) {
-      const c = collection(this.firestore, "users", user.uid, "plants") as CollectionReference<PlantWithoutImage>
+      const c = collection(this.firestore, "users", user.uid, "plants")
       const docRef = await addDoc(c, plantWithoutImage)
 
-      if (imageDataUrl) {
-        const imgResp = await fetch(imageDataUrl)
+      let imageUrl = ''
+      if (imageDataUrl !== '') {
+        const imgResp = await fetch(imageUrl)
         const imgBlob = await imgResp.blob()
         const imgRef = ref(this.storage, `users/${user.uid}/plants/${docRef.id}`)
         await uploadBytes(imgRef, imgBlob)
+        imageUrl = await getDownloadURL(imgRef)
       }
+
+      await updateDoc(docRef, { imageUrl })
       return
     }
 
@@ -78,23 +67,33 @@ export class PlantsService {
     throw new Error("User is not logged in")
   }
 
-  async updatePlant(plantID: string, { imageDataUrl, ...plantWithoutImage }: Partial<Plant>) {
+  async updatePlant(plantID: string, plantWithoutImage: Partial<PlantWithoutImage>, imageDataUrl?: string) {
     const user = await lastValueFrom(this.auth.user$.pipe(take(1)))
 
     if (user) {
-      const d = doc(this.firestore, "users", user.uid, "plants", plantID)
-      await updateDoc(d, plantWithoutImage as Partial<PlantWithoutImage>)
+      let imageUrl: string | undefined = undefined
 
       if (imageDataUrl === '') {
         const imgRef = ref(this.storage, `users/${user.uid}/plants/${plantID}`)
         await deleteObject(imgRef)
+        imageUrl = ''
       }
       else if (imageDataUrl !== undefined) {
         const imgResp = await fetch(imageDataUrl)
         const imgBlob = await imgResp.blob()
         const imgRef = ref(this.storage, `users/${user.uid}/plants/${plantID}`)
         await uploadBytes(imgRef, imgBlob)
+        imageUrl = await getDownloadURL(imgRef)
       }
+
+      let plant: Partial<Plant> = plantWithoutImage
+      if (imageUrl !== undefined) {
+        plant = { ...plant, imageUrl }
+      }
+
+      const d = doc(this.firestore, "users", user.uid, "plants", plantID)
+      await updateDoc(d, plant)
+
       return
     }
 
@@ -105,22 +104,15 @@ export class PlantsService {
     const user = await lastValueFrom(this.auth.user$.pipe(take(1)))
 
     if (user) {
-      const d = doc(this.firestore, "users", user.uid, "plants", plantID) as DocumentReference<PlantWithoutImage>
-      let plantWithoutImage = (await getDoc(d)).data()
+      const d = doc(this.firestore, "users", user.uid, "plants", plantID) as DocumentReference<Plant>
+      let plant = (await getDoc(d)).data()
 
-      if (!plantWithoutImage) {
+      if (!plant) {
         throw new Error("Plant does not exist")
       }
 
-      plantWithoutImage.id = plantID
-
-      const imageRef = ref(this.storage, `users/${user.uid}/plants/${plantID}`)
-      let imageDataUrl = ''
-      try {
-        imageDataUrl = await getDownloadURL(imageRef)
-      }
-      catch (e) { }
-      return { ...plantWithoutImage, imageDataUrl }
+      plant.id = plantID
+      return plant
     }
 
     throw new Error("User is not logged in")

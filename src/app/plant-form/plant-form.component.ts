@@ -9,8 +9,8 @@ import { timezones } from './timezones'
   styleUrls: ['./plant-form.component.scss']
 })
 export class PlantFormComponent implements OnInit {
-  @Input() imageDataUrl!: string
-  @Output() imageDataUrlChange = new EventEmitter<string>()
+  @Input() imageUrl!: string
+  @Output() imageUrlChange = new EventEmitter<string>()
 
   @Input() isCropping!: boolean
   @Output() isCroppingChange = new EventEmitter<boolean>()
@@ -32,8 +32,8 @@ export class PlantFormComponent implements OnInit {
   }
 
   imageCropped(event: ImageCroppedEvent) {
-    this.imageDataUrl = event.base64 as string
-    this.imageDataUrlChange.emit(this.imageDataUrl)
+    this.imageUrl = event.base64 as string
+    this.imageUrlChange.emit(this.imageUrl)
   }
 
   loadImageFailed() {
@@ -42,8 +42,8 @@ export class PlantFormComponent implements OnInit {
 
   clearImage() {
     this.imageChangedEvent = ''
-    this.imageDataUrl = ''
-    this.imageDataUrlChange.emit(this.imageDataUrl)
+    this.imageUrl = ''
+    this.imageUrlChange.emit(this.imageUrl)
   }
 
   acceptCropping() {
