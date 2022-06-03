@@ -8,7 +8,7 @@ import { ServiceWorkerModule } from '@angular/service-worker'
 import { environment } from '../environments/environment'
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app'
 import { provideAuth, getAuth } from '@angular/fire/auth'
-import { provideFirestore, getFirestore } from '@angular/fire/firestore'
+import { provideFirestore, getFirestore, connectFirestoreEmulator, enableIndexedDbPersistence } from '@angular/fire/firestore'
 import { provideMessaging, getMessaging } from '@angular/fire/messaging'
 import { LoginComponent } from './pages/login/login.component'
 import { RegisterComponent } from './pages/register/register.component'
@@ -23,8 +23,9 @@ import { PlantsListElementComponent } from './pages/dashboard/plants-list-elemen
 import { AddPlantComponent } from './pages/add-plant/add-plant.component'
 import { PlantFormComponent } from './plant-form/plant-form.component'
 import { ImageCropperModule } from 'ngx-image-cropper'
-import { getStorage, provideStorage } from '@angular/fire/storage';
+import { connectStorageEmulator, getStorage, provideStorage } from '@angular/fire/storage'
 import { EditPlantComponent } from './pages/edit-plant/edit-plant.component'
+import { connectAuthEmulator } from '@firebase/auth'
 
 @NgModule({
   declarations: [
@@ -56,10 +57,23 @@ import { EditPlantComponent } from './pages/edit-plant/edit-plant.component'
       registrationStrategy: 'registerWhenStable:30000'
     }),
     provideFirebaseApp(() => initializeApp(environment.firebase)),
-    provideAuth(() => getAuth()),
-    provideFirestore(() => getFirestore()),
     provideMessaging(() => getMessaging()),
-    provideStorage(() => getStorage()),
+    provideAuth(() => {
+      const auth = getAuth()
+      connectAuthEmulator(auth, 'http://127.0.0.1:9099', { disableWarnings: true })
+      return auth
+    }),
+    provideFirestore(() => {
+      const firestore = getFirestore()
+      connectFirestoreEmulator(firestore, 'localhost', 8080)
+      enableIndexedDbPersistence(firestore)
+      return firestore
+    }),
+    provideStorage(() => {
+      const storage = getStorage()
+      connectStorageEmulator(storage, 'localhost', 9199)
+      return storage
+    }),
   ],
   bootstrap: [AppComponent]
 })
