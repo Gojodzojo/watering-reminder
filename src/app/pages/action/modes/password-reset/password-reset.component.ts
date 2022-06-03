@@ -1,7 +1,7 @@
 import { Component } from '@angular/core'
 import { FormControl } from '@angular/forms'
 import { ActivatedRoute } from '@angular/router'
-import { AuthService } from 'src/app/services/auth.service'
+import { AuthService } from 'src/app/services/auth/auth.service'
 
 enum Status {
   WaitingForInput,

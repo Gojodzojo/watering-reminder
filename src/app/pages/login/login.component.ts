@@ -2,7 +2,7 @@ import { Component } from '@angular/core'
 import { FormControl, FormGroup } from '@angular/forms'
 import { Router } from '@angular/router'
 import errorCodeToMessage from 'src/app/scripts/errorCodeToMessage'
-import { AuthService } from 'src/app/services/auth.service'
+import { AuthService } from 'src/app/services/auth/auth.service'
 
 enum Status {
   WaitingForInput,

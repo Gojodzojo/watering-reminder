@@ -1,0 +1,58 @@
+<form [formGroup]="form">
+    <label>
+        <span>Plant name</span><br>
+        <input type="text" placeholder="Plant name" formControlName="name" required>
+    </label>
+    <div *ngIf="isInvalid('name')">
+        Plant name is required.
+    </div>
+    <br>
+
+    <label>
+        <span>Plant description</span><br>
+        <textarea rows="4" cols="50" formControlName="description" placeholder="Plant description"></textarea><br>
+    </label>
+    <br>
+
+    <label>
+        <span>Watering time</span><br>
+        <input type="time" formControlName="waterTime" required><br>
+    </label>
+    <br>
+    <div *ngIf="isInvalid('waterTime')">
+        Watering time is required.
+    </div>
+
+    <label>
+        <span>Timezone</span><br>
+        <select formControlName="timezone" required>
+            <option *ngFor="let timezone of timezones" [value]="timezone">
+                {{timezone}}
+            </option>
+        </select>
+    </label>
+    <div *ngIf="isInvalid('timezone')">
+        Timezone is required.
+    </div>
+    <br>
+
+    <div *ngIf="!isCropping">
+        <button type="button">
+            <label>
+                Change image
+                <input type="file" accept="image/*" (change)="fileChangeEvent($event)" style="display: none">
+            </label>
+        </button>
+        <button *ngIf="imageUrl" (click)="clearImage()">Clear image</button><br>
+        <img [src]="imageUrl ? imageUrl : 'assets/images/default_plant_image.png'" />
+    </div>
+
+
+    <div *ngIf="isCropping">
+        <image-cropper [imageChangedEvent]="imageChangedEvent" [maintainAspectRatio]="true" [resizeToWidth]="200"
+            [ngStyle]="{'maxHeight': '500px', 'maxWidth': '500px'}" [cropperMinWidth]="100" [cropperMinHeight]="100"
+            (imageCropped)="imageCropped($event)" (loadImageFailed)="loadImageFailed()" format="png">
+        </image-cropper>
+        <button (click)="acceptCropping()">Accept</button>
+    </div>
+</form>
