@@ -10,6 +10,7 @@ import { UnverifiedComponent } from './pages/unverified/unverified.component'
 import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password.component'
 import { ActionComponent } from './pages/action/action.component'
 import { AddPlantComponent } from './pages/add-plant/add-plant.component'
+import { EditPlantComponent } from './pages/edit-plant/edit-plant.component'
 
 const loggedInVerifiedUser: AuthPipeGenerator = () => (
   map(user => {
@@ -38,6 +39,7 @@ const loggedOutUser: AuthPipeGenerator = () => (
 const routes: Routes = [
   { path: 'action', component: ActionComponent },
   { path: 'add-plant', component: AddPlantComponent, ...canActivate(loggedInVerifiedUser) },
+  { path: 'edit-plant/:id', component: EditPlantComponent, ...canActivate(loggedInVerifiedUser) },
   { path: 'dashboard', component: DashboardComponent, ...canActivate(loggedInVerifiedUser) },
   { path: 'login', component: LoginComponent, ...canActivate(loggedOutUser) },
   { path: 'register', component: RegisterComponent, ...canActivate(loggedOutUser) },

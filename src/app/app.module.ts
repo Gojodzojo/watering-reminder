@@ -23,7 +23,8 @@ import { PlantsListElementComponent } from './pages/dashboard/plants-list-elemen
 import { AddPlantComponent } from './pages/add-plant/add-plant.component'
 import { PlantFormComponent } from './plant-form/plant-form.component'
 import { ImageCropperModule } from 'ngx-image-cropper'
-import { getStorage, provideStorage } from '@angular/fire/storage'
+import { getStorage, provideStorage } from '@angular/fire/storage';
+import { EditPlantComponent } from './pages/edit-plant/edit-plant.component'
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { getStorage, provideStorage } from '@angular/fire/storage'
     PlantsListElementComponent,
     AddPlantComponent,
     PlantFormComponent,
+    EditPlantComponent,
   ],
   imports: [
     BrowserModule,
