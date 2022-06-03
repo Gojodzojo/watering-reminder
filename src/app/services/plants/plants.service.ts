@@ -36,7 +36,7 @@ export class PlantsService {
 
       let imageUrl = ''
       if (imageDataUrl !== '') {
-        const imgResp = await fetch(imageUrl)
+        const imgResp = await fetch(imageDataUrl)
         const imgBlob = await imgResp.blob()
         const imgRef = ref(this.storage, `users/${user.uid}/plants/${docRef.id}`)
         await uploadBytes(imgRef, imgBlob)
