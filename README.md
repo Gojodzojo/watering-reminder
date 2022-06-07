@@ -8,7 +8,7 @@ Visit the [app page](https://watering-reminder.web.app/) and get started now!
 
 ## Used technologies
 
-The ui for this project is built with Angular. The ui will be designed using Figma. The backend is built with Firebase.
+The ui for this project is built with Angular. The ui is being designed using [Figma](https://www.figma.com/file/D3py4Q4mKpX9hQksQ4qvuQ/Watering-Reminder?node-id=47909%3A2). The backend is built with Firebase.
 
 ## Project roadmap
 
@@ -16,7 +16,7 @@ The ui for this project is built with Angular. The ui will be designed using Fig
 |------------------------------------------------------------------|----------------:|
 | Create a login and registration page.                            |            Done |
 | Create page to manage your plants.                               |            Done |
-| Create scheduled functions on backend to send push notifications |     In progress |
-| Design ui in Figma                                               | Not yet started |
-| Apply styles to application                                      | Not yet started |
+| Create scheduled functions on backend to send push notifications |            Done |
+| Design ui in Figma                                               |     In progress |
+| Apply styles to application                                      |     In progress |
 | Add app to Google Play as TWA                                    | Not yet started |
