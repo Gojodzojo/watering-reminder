@@ -60,18 +60,18 @@ import { connectAuthEmulator } from '@firebase/auth'
     provideMessaging(() => getMessaging()),
     provideAuth(() => {
       const auth = getAuth()
-      connectAuthEmulator(auth, 'http://127.0.0.1:9099', { disableWarnings: true })
+      if(!environment.production) connectAuthEmulator(auth, 'http://127.0.0.1:9099', { disableWarnings: true })
       return auth
     }),
     provideFirestore(() => {
       const firestore = getFirestore()
-      connectFirestoreEmulator(firestore, 'localhost', 8080)
+      if(!environment.production) connectFirestoreEmulator(firestore, 'localhost', 8080)
       enableIndexedDbPersistence(firestore)
       return firestore
     }),
     provideStorage(() => {
       const storage = getStorage()
-      connectStorageEmulator(storage, 'localhost', 9199)
+      if(!environment.production) connectStorageEmulator(storage, 'localhost', 9199)
       return storage
     }),
   ],

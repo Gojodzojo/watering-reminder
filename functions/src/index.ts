@@ -1,9 +1,41 @@
-import * as functions from "firebase-functions";
+import {pubsub} from "firebase-functions";
+import * as admin from "firebase-admin";
+import {MessagingPayload} from "firebase-admin/lib/messaging/messaging-api";
 
-// // Start writing Firebase Functions
-// // https://firebase.google.com/docs/functions/typescript
-//
-export const helloWorld = functions.https.onRequest((request, response) => {
-  functions.logger.info("Hello logs!", {structuredData: true});
-  response.send("Hello from Firebase!");
+const app = admin.initializeApp();
+const firestore = app.firestore();
+const messaging = app.messaging();
+
+export const sendPush = pubsub.schedule("every 1 minutes").onRun(async () => {
+  const users = await firestore.collection("users").listDocuments();
+  users.forEach(async (user) => {
+    const plants = await user.collection("plants").get();
+    plants.forEach(async (plant) => {
+      const plantData = plant.data();
+
+      const timeFormatOptions: Intl.DateTimeFormatOptions = {
+        timeZone: plantData.timezone,
+        timeStyle: "short",
+      };
+      // eslint-disable-next-line
+      const timeInPlantTimezone = new Intl.DateTimeFormat("PL", timeFormatOptions).format();
+
+      if (timeInPlantTimezone === plantData.waterTime) {
+        const payload: MessagingPayload = {
+          notification: {
+            title: `It's time to water ${plantData.name}`,
+            body: plantData.description,
+            image: plantData.imageUrl ? plantData.imageUrl : "https://watering-reminder.web.app/assets/images/default_plant_image.png",
+            icon: "https://watering-reminder.web.app/assets/icons/icon-144x144.png",
+          },
+        };
+
+        const fcmTokens = await user.collection("fcmTokens").get();
+        fcmTokens.forEach(async (token) => {
+          const tokenData = token.data() as { fcmToken: string };
+          await messaging.sendToDevice(tokenData.fcmToken, payload);
+        });
+      }
+    });
+  });
 });
