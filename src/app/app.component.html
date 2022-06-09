@@ -1,1 +1,6 @@
-<router-outlet></router-outlet>
+<div class="app">
+    <app-toolbar *ngIf="displayToolbar" class="toolbar"></app-toolbar>
+    <div class="page-content">
+        <router-outlet></router-outlet>
+    </div>
+</div>

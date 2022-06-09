@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core'
 import { BrowserModule } from '@angular/platform-browser'
 import { ReactiveFormsModule, FormsModule } from '@angular/forms'
-
 import { AppRoutingModule } from './app-routing.module'
 import { AppComponent } from './app.component'
 import { ServiceWorkerModule } from '@angular/service-worker'
@@ -25,7 +24,15 @@ import { PlantFormComponent } from './plant-form/plant-form.component'
 import { ImageCropperModule } from 'ngx-image-cropper'
 import { connectStorageEmulator, getStorage, provideStorage } from '@angular/fire/storage'
 import { EditPlantComponent } from './pages/edit-plant/edit-plant.component'
-import { connectAuthEmulator } from '@firebase/auth'
+import { connectAuthEmulator } from '@firebase/auth';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatCardModule } from '@angular/material/card';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { ToolbarComponent } from './toolbar/toolbar.component';
 
 @NgModule({
   declarations: [
@@ -43,8 +50,15 @@ import { connectAuthEmulator } from '@firebase/auth'
     AddPlantComponent,
     PlantFormComponent,
     EditPlantComponent,
+    ToolbarComponent,
   ],
   imports: [
+    MatProgressBarModule,
+    MatProgressSpinnerModule,
+    MatIconModule,
+    MatButtonModule,
+    MatCardModule,
+    MatToolbarModule,
     BrowserModule,
     AppRoutingModule,
     FormsModule,
@@ -74,6 +88,7 @@ import { connectAuthEmulator } from '@firebase/auth'
       if(!environment.production) connectStorageEmulator(storage, 'localhost', 9199)
       return storage
     }),
+    BrowserAnimationsModule,
   ],
   bootstrap: [AppComponent]
 })

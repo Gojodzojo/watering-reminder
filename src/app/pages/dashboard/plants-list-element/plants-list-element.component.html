@@ -1,8 +1,17 @@
-<h3>{{ plant.name }}</h3>
-<p>{{ plant.description }} {{ plant.waterTime }}</p>
-<button (click)="deletePlant()">Delete</button>
-<p *ngIf="deleteState === DeleteState.Loading">Loading</p>
-<p *ngIf="deleteState === DeleteState.Error">Could not delete plant</p>
-<button [routerLink]="'/edit-plant/' + plant.id">Edit</button>
-<img [src]="plant.imageUrl ? plant.imageUrl : 'assets/images/default_plant_image.png'" alt="plant image">
-<hr>
+<mat-card class="plant-list-element">
+  <mat-card-header class="card-header">
+    <mat-card-title>{{ plant.name }}</mat-card-title>
+    <mat-card-subtitle>Watering time: {{ plant.waterTime }}</mat-card-subtitle>
+  </mat-card-header>
+  <img mat-card-image [src]="plant.imageUrl ? plant.imageUrl : 'assets/images/default_plant_image.png'" alt="Plant image" width="500px">
+  <mat-card-content>
+    <p class="description">{{ plant.description }}</p>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-button [routerLink]="'/edit-plant/' + plant.id">EDIT</button>
+    <button mat-button (click)="deletePlant()">DELETE</button>
+  </mat-card-actions>
+  <mat-card-footer>
+    <mat-progress-bar *ngIf="deleteState === DeleteState.Loading" mode="indeterminate"></mat-progress-bar>
+  </mat-card-footer>
+</mat-card>

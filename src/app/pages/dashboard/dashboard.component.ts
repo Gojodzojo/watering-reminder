@@ -12,19 +12,12 @@ import { PlantsService } from 'src/app/services/plants/plants.service'
 })
 export class DashboardComponent {
   isLoading = true
-  
 
-  constructor(public auth: AuthService, public router: Router, public plantsService: PlantsService, public notificationsService: NotificationsService) {
+  constructor(public auth: AuthService, public plantsService: PlantsService, public notificationsService: NotificationsService) {
     this.plantsService.plants$.subscribe(() => this.isLoading = false)
 
     if(!this.notificationsService.areNotificationsAllowed) {
       this.notificationsService.registerToken()
     }
-  }
-
-  async logout() {
-    await this.notificationsService.unregisterToken()
-    await this.auth.logout()
-    await this.router.navigate(['/login'])
   }
 }
