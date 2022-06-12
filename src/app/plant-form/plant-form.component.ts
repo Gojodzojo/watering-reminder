@@ -54,4 +54,8 @@ export class PlantFormComponent implements OnInit {
   isInvalid(controlName: string) {
     return (this.form.controls[controlName].dirty || this.form.controls[controlName].touched) && this.form.controls[controlName].errors?.['required']
   }
+
+  get plantImageUrl() {
+    return this.imageUrl ? this.imageUrl : 'assets/images/default_plant_image.png'
+  }
 }

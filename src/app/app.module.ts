@@ -32,6 +32,9 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
 import { ToolbarComponent } from './toolbar/toolbar.component';
 
 @NgModule({
@@ -53,6 +56,9 @@ import { ToolbarComponent } from './toolbar/toolbar.component';
     ToolbarComponent,
   ],
   imports: [
+    MatSelectModule,
+    MatInputModule,
+    MatFormFieldModule,
     MatProgressBarModule,
     MatProgressSpinnerModule,
     MatIconModule,
