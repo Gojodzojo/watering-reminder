@@ -8,7 +8,6 @@ import { initializeApp, provideFirebaseApp } from '@angular/fire/app'
 import { provideAuth, getAuth } from '@angular/fire/auth'
 import { provideFirestore, getFirestore, connectFirestoreEmulator, enableIndexedDbPersistence } from '@angular/fire/firestore'
 import { provideMessaging, getMessaging } from '@angular/fire/messaging'
-import { IndexComponent } from './pages/index/index.component'
 import { connectStorageEmulator, getStorage, provideStorage } from '@angular/fire/storage'
 import { connectAuthEmulator } from '@firebase/auth';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
@@ -17,7 +16,6 @@ import { CommonModulesModule } from './common-modules/common-modules.module';
 @NgModule({
   declarations: [
     AppComponent,
-    IndexComponent,
   ],
   imports: [
     BrowserModule,
@@ -33,7 +31,7 @@ import { CommonModulesModule } from './common-modules/common-modules.module';
     provideMessaging(() => getMessaging()),
     provideAuth(() => {
       const auth = getAuth()
-      // if(!environment.production) connectAuthEmulator(auth, 'http://127.0.0.1:9099', { disableWarnings: true })
+      if(!environment.production) connectAuthEmulator(auth, 'http://127.0.0.1:9099', { disableWarnings: true })
       return auth
     }),
     provideFirestore(() => {
