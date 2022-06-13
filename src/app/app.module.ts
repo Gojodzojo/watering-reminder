@@ -8,11 +8,7 @@ import { initializeApp, provideFirebaseApp } from '@angular/fire/app'
 import { provideAuth, getAuth } from '@angular/fire/auth'
 import { provideFirestore, getFirestore, connectFirestoreEmulator, enableIndexedDbPersistence } from '@angular/fire/firestore'
 import { provideMessaging, getMessaging } from '@angular/fire/messaging'
-import { LoginComponent } from './pages/login/login.component'
-import { RegisterComponent } from './pages/register/register.component'
 import { IndexComponent } from './pages/index/index.component'
-import { UnverifiedComponent } from './pages/unverified/unverified.component'
-import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password.component'
 import { ActionComponent } from './pages/action/action.component'
 import { PasswordResetComponent } from './pages/action/modes/password-reset/password-reset.component'
 import { EmailVerificationComponent } from './pages/action/modes/email-verification/email-verification.component'
@@ -24,11 +20,7 @@ import { CommonModulesModule } from './common-modules/common-modules.module';
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent,
-    RegisterComponent,
     IndexComponent,
-    UnverifiedComponent,
-    ForgotPasswordComponent,
     ActionComponent,
     PasswordResetComponent,
     EmailVerificationComponent,

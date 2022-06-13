@@ -14,7 +14,7 @@ export class ToolbarComponent {
   async logout() {
     await this.notificationsService.unregisterToken()
     await this.auth.logout()
-    await this.router.navigate(['/login'])
+    await this.router.navigate(['/auth/login'])
   }
 
 }

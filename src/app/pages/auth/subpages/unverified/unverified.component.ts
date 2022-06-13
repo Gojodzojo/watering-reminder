@@ -13,7 +13,7 @@ export class UnverifiedComponent {
 
   async returnToLogin() {
     await this.auth.logout()
-    await this.router.navigate(['/login'])
+    await this.router.navigate(['/auth/login'])
   }
 
 }
