@@ -3,7 +3,6 @@ import { RouterModule, Routes } from '@angular/router'
 import { IndexComponent } from './pages/index/index.component'
 import { canActivate, AuthPipeGenerator } from '@angular/fire/auth-guard'
 import { map } from 'rxjs'
-import { ActionComponent } from './pages/action/action.component'
 
 const loggedInVerifiedUser: AuthPipeGenerator = () => (
   map(user => {
@@ -22,7 +21,7 @@ const loggedOutUser: AuthPipeGenerator = () => (
 )
 
 const routes: Routes = [
-  { path: 'action', component: ActionComponent },
+  { path: 'action', loadChildren: () => import('./pages/action/action.module').then(m => m.ActionModule) },
   { path: 'logged-in', loadChildren: () => import('./pages/logged-in/logged-in.module').then(m => m.LoggedInModule), ...canActivate(loggedInVerifiedUser) },
   { path: '', component: IndexComponent, ...canActivate(loggedOutUser) },
   { path: 'auth', loadChildren: () => import('./pages/auth/auth.module').then(m => m.AuthModule) },
