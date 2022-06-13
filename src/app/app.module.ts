@@ -11,7 +11,6 @@ import { provideMessaging, getMessaging } from '@angular/fire/messaging'
 import { connectStorageEmulator, getStorage, provideStorage } from '@angular/fire/storage'
 import { connectAuthEmulator } from '@firebase/auth';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
-import { CommonModulesModule } from './common-modules/common-modules.module';
 
 @NgModule({
   declarations: [
@@ -20,7 +19,6 @@ import { CommonModulesModule } from './common-modules/common-modules.module';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    CommonModulesModule,
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: environment.production,
       // Register the ServiceWorker as soon as the application is stable
