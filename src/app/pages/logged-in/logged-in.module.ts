@@ -5,7 +5,6 @@ import { LoggedInRoutingModule } from './logged-in-routing.module';
 import { LoggedInComponent } from './logged-in.component';
 import { DashboardComponent } from './subpages/dashboard/dashboard.component'
 import { PlantsListElementComponent } from './subpages/dashboard/plants-list-element/plants-list-element.component'
-import { ToolbarComponent } from './toolbar/toolbar.component'
 import { AddPlantComponent } from './subpages/add-plant/add-plant.component'
 import { PlantFormComponent } from './plant-form/plant-form.component'
 import { CommonModulesModule } from 'src/app/common-modules/common-modules.module'
@@ -19,7 +18,6 @@ import { EditPlantComponent } from './subpages/edit-plant/edit-plant.component'
     LoggedInComponent,
     DashboardComponent,
     PlantsListElementComponent,
-    ToolbarComponent,
     AddPlantComponent,
     PlantFormComponent,
     EditPlantComponent

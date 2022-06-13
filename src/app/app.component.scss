@@ -1,4 +1,12 @@
-.app {
+.app  {
     width: 100vw;
     height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.page-content {
+    width: 100vw;
+    min-height: 0; /* https://stackoverflow.com/q/36247140/3597276 */
+    flex-grow: 1;
 }

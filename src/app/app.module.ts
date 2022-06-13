@@ -11,14 +11,24 @@ import { provideMessaging, getMessaging } from '@angular/fire/messaging'
 import { connectStorageEmulator, getStorage, provideStorage } from '@angular/fire/storage'
 import { connectAuthEmulator } from '@firebase/auth';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
+import { ToolbarComponent } from './toolbar/toolbar.component'
+import { MatToolbarModule } from '@angular/material/toolbar'
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button'
+
 
 @NgModule({
   declarations: [
     AppComponent,
+    ToolbarComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    MatToolbarModule,
+    MatIconModule,
+    MatButtonModule,
+    BrowserAnimationsModule,
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: environment.production,
       // Register the ServiceWorker as soon as the application is stable
@@ -43,7 +53,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
       if(!environment.production) connectStorageEmulator(storage, 'localhost', 9199)
       return storage
     }),
-    BrowserAnimationsModule,
   ],
   bootstrap: [AppComponent]
 })
