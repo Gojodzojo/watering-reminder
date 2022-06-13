@@ -42,7 +42,7 @@ export class EditPlantComponent {
 
         this.editPlantState = EditPlantState.WaitingForInput
       } catch (error) {
-        await this.router.navigate(['/dashboard'])
+        await this.router.navigate(['/logged-in/dashboard'])
       }
     })
   }
@@ -64,7 +64,7 @@ export class EditPlantComponent {
           dataToUpdate,
           this.imageUrl !== this.originalPlant.imageUrl ? this.imageUrl : undefined
         )
-        await this.router.navigate(['/dashboard'])
+        await this.router.navigate(['/logged-in/dashboard'])
       } catch (error) {
         console.error(error)
         this.editPlantState = EditPlantState.UpdatingError
@@ -76,7 +76,7 @@ export class EditPlantComponent {
     try {
       this.editPlantState = EditPlantState.DeletingPlant
       await this.plantsService.deletePlant(this.originalPlant.id, !!this.originalPlant.imageUrl)
-      await this.router.navigate(['/dashboard'])
+      await this.router.navigate(['/logged-in/dashboard'])
     } catch (error) {
       console.error(error)
       this.editPlantState = EditPlantState.DeletingError

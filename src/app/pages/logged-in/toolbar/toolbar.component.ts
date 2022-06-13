@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router'
-import { AuthService } from '../services/auth/auth.service'
-import { NotificationsService } from '../services/notifiications/notifications.service'
+import { AuthService } from '../../../services/auth/auth.service'
+import { NotificationsService } from '../../../services/notifiications/notifications.service'
 
 @Component({
   selector: 'app-toolbar',

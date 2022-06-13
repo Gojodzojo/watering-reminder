@@ -34,7 +34,7 @@ export class AddPlantComponent {
       try {
         this.addPlantState = AddPlantState.Loading
         await this.plantsService.addPlant(this.form.value, this.imageUrl)
-        await this.router.navigate(['/dashboard'])
+        await this.router.navigate(['/logged-in/dashboard'])
       } catch (error) {
         console.error(error)
         this.addPlantState = AddPlantState.Error

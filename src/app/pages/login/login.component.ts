@@ -28,7 +28,7 @@ export class LoginComponent {
   constructor(public auth: AuthService, public router: Router) { }
 
   async navigateToDashboard() {
-    await this.router.navigate(['/dashboard'])
+    await this.router.navigate(['/logged-in/dashboard'])
   }
 
   async onSubmit() {
