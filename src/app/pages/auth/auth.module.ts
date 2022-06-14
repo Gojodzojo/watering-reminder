@@ -8,6 +8,7 @@ import { ForgotPasswordComponent } from './subpages/forgot-password/forgot-passw
 import { LoginComponent } from './subpages/login/login.component'
 import { RegisterComponent } from './subpages/register/register.component'
 import { UnverifiedComponent } from './subpages/unverified/unverified.component'
+import { MatDividerModule } from '@angular/material/divider';
 
 
 @NgModule({
@@ -22,6 +23,7 @@ import { UnverifiedComponent } from './subpages/unverified/unverified.component'
     CommonModule,
     AuthRoutingModule,
     CommonModulesModule,
+    MatDividerModule,
   ]
 })
 export class AuthModule { }
