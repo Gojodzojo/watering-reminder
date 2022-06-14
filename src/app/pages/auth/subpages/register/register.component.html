@@ -3,8 +3,15 @@
         <div *ngIf="status === Status.Success; then successBlock else formBlock"></div>
 
         <ng-template #successBlock>
-            <p>You have successfully created a new account. Please verify it by clicking the link sent to you by email.</p>
-            <button routerLink="/auth/login">Return to login</button>
+            <mat-card-title class="title">Success</mat-card-title>
+            <div class="success">
+                <mat-card-content>
+                    <p>You have successfully created a new account. Please verify it by clicking the link sent to you by email.</p>
+                </mat-card-content>
+                <div class="return-button-container">
+                    <button mat-button routerLink="/auth/login">Return to login</button>
+                </div>
+            </div>
         </ng-template>
 
         <ng-template #formBlock>
