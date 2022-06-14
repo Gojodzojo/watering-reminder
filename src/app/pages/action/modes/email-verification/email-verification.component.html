@@ -1,17 +1,25 @@
 <ng-container [ngSwitch]="status">
     <div *ngSwitchCase="Status.Success">
-        <h1>Success</h1>
-        <p>Your email has been successfully verified</p>
-        <button routerLink="/auth/login">Go to login</button>
+        <mat-card-title class="title">Success</mat-card-title>
+        <mat-card-content class="content">
+            <p>Your account has been verified. You can now login.</p>
+        </mat-card-content>
+        <div class="buttons-container">
+            <button mat-button routerLink="/auth/login">Go to login</button>
+        </div>
     </div>
 
     <div *ngSwitchCase="Status.Error">
-        <h1>Error</h1>
-        <p>No communication with server.</p>
-        <button (click)="verify()">Try agin</button>
+        <mat-card-title class="title">Error</mat-card-title>
+        <mat-card-content class="content">
+            <p>No communication with server.</p>
+        </mat-card-content>
+        <div class="buttons-container">
+            <button mat-button (click)="verify()">Try agin</button>
+        </div>
     </div>
 
     <div *ngSwitchDefault>
-        <p>Loading</p>
+        <mat-spinner></mat-spinner>
     </div>
 </ng-container>

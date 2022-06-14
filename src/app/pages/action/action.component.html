@@ -1,19 +1,22 @@
-<ng-container [ngSwitch]="mode">
-    <div *ngSwitchCase="Mode.Error">
-        <h1>Error</h1>
-        <p>The link has expired or it has already been used</p>
-    </div>
-
-    <div *ngSwitchCase="Mode.EmailVerification">
-        <app-email-verification></app-email-verification>
-    </div>
-
-    <div *ngSwitchCase="Mode.PasswordReset">
-        <app-password-reset></app-password-reset>
-    </div>
-
-    <div *ngSwitchDefault>
-        <p>Loading</p>
-    </div>
-
-</ng-container>
+<div class="action">
+    <mat-card class="card" [ngSwitch]="mode">
+        <div *ngSwitchCase="Mode.Error">
+            <mat-card-title class="title">Error</mat-card-title>
+            <mat-card-content class="content">
+                <p>The link has expired or it has already been used.</p>
+            </mat-card-content>
+        </div>
+    
+        <div *ngSwitchCase="Mode.EmailVerification">
+            <app-email-verification></app-email-verification>
+        </div>
+    
+        <div *ngSwitchCase="Mode.PasswordReset">
+            <app-password-reset></app-password-reset>
+        </div>
+    
+        <div *ngSwitchDefault>
+            <mat-spinner></mat-spinner>
+        </div>
+    </mat-card>
+</div>
