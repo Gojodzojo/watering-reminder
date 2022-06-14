@@ -1,5 +1,5 @@
 import { Component } from '@angular/core'
-import { FormControl, FormGroup } from '@angular/forms'
+import { AbstractControl, FormControl, FormGroup, ValidationErrors, ValidatorFn } from '@angular/forms'
 import errorCodeToMessage from 'src/app/scripts/errorCodeToMessage'
 import { AuthService } from 'src/app/services/auth/auth.service'
 
@@ -23,7 +23,7 @@ export class RegisterComponent {
   registerForm = new FormGroup({
     email: new FormControl(''),
     password: new FormControl(''),
-    confirmPassword: new FormControl(''),
+    confirmPassword: new FormControl('', [this.passwordsEqualValidator()]),
   })
 
   constructor(public auth: AuthService) { }
@@ -43,15 +43,18 @@ export class RegisterComponent {
     }
   }
 
-  isControlModified(controlName: string) {
-    return this.registerForm.controls[controlName].dirty || this.registerForm.controls[controlName].touched
-  }
-
   get errorMessage() {
     return errorCodeToMessage(this.error.code)
   }
 
   get passordsAreEqual() {
+    if(this.registerForm === undefined)  return false
     return this.registerForm.value.password === this.registerForm.value.confirmPassword
+  }
+
+  passwordsEqualValidator(): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+      return this.passordsAreEqual ? null : {passwordsNotEqual: true};
+    };
   }
 }

@@ -1,66 +1,81 @@
-<div *ngIf="status === Status.Success; then successBlock else formBlock"></div>
+<div class="register">
+    <mat-card class="card">
+        <div *ngIf="status === Status.Success; then successBlock else formBlock"></div>
 
-<ng-template #successBlock>
-    <p>You have successfully created a new account. Please verify it by clicking the link sent to you by email.</p>
-    <button routerLink="/auth/login">Return to login</button>
-</ng-template>
+        <ng-template #successBlock>
+            <p>You have successfully created a new account. Please verify it by clicking the link sent to you by email.</p>
+            <button routerLink="/auth/login">Return to login</button>
+        </ng-template>
 
-<ng-template #formBlock>
-    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
-        <input type="email" placeholder="Email address" formControlName="email" required email><br>
-        <input type="password" placeholder="Password" formControlName="password" required minlength="6"
-            maxlength="20"><br>
-        <input type="password" placeholder="Confirm password" formControlName="confirmPassword"><br>
+        <ng-template #formBlock>
+            <mat-card-title class="title">Register with email</mat-card-title>
+            <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="form">
 
-        <div *ngIf="isControlModified('email')">
-            <div *ngIf="registerForm.controls['email'].errors?.['email']">
-                Email is invalid.
+                <mat-form-field class="form-field" appearance="outline">
+                    <mat-label>Email</mat-label>
+                    <input matInput type="email" placeholder="Email" formControlName="email" required email>
+                    <mat-error *ngIf="registerForm.controls['email'].errors?.['email']">
+                        Email is invalid
+                    </mat-error>
+                    <mat-error *ngIf="registerForm.controls['email'].errors?.['required']">
+                        Email is required
+                    </mat-error>
+                </mat-form-field>
+                <br>
+
+                <mat-form-field class="form-field" appearance="outline">
+                    <mat-label>Password</mat-label>
+                    <input matInput type="password" placeholder="Password" formControlName="password" required minlength="6" maxlength="20">
+                    <mat-error *ngIf="registerForm.controls['password'].errors?.['required']">
+                        Password is required
+                    </mat-error>
+                    <mat-error *ngIf="registerForm.controls['password'].errors?.['minlength']">
+                        Password must be at least 6 characters long
+                    </mat-error>
+                    <mat-error *ngIf="registerForm.controls['password'].errors?.['maxlength']">
+                        Password cannot be more than 20 characters long
+                    </mat-error>
+                </mat-form-field>
+                <br>
+
+                <mat-form-field class="form-field" appearance="outline">
+                    <mat-label>Confirm password</mat-label>
+                    <input matInput type="password" placeholder="Confirm password" formControlName="confirmPassword" required>
+                    <mat-error *ngIf="registerForm.controls['confirmPassword'].errors?.['passwordsNotEqual']">
+                        Passwords do not match
+                    </mat-error>
+                </mat-form-field>
+                <br>
+
+                <div *ngIf="status === Status.Error" [ngSwitch]="error.code">
+                    <div *ngSwitchCase="'auth/network-request-failed'">
+                        Network request failed.
+                    </div>
+
+                    <div *ngSwitchCase="'auth/email-already-in-use'">
+                        Email is already in use.
+                    </div>
+
+                    <div *ngSwitchDefault>
+                        {{errorMessage}}
+                    </div>
+                </div>
+
+                <div *ngIf="status === Status.Loading">
+                    Loading.
+                </div>
+
+                <button type="submit" [disabled]="registerForm.invalid || !passordsAreEqual" mat-flat-button color="primary" class="register-button">
+                    Register
+                </button>
+            </form>
+            <div class="return-button-container">
+                <button mat-button routerLink="/auth/login">Return to login</button>
             </div>
+        </ng-template>
 
-            <div *ngIf="registerForm.controls['email'].errors?.['required']">
-                Email is required.
-            </div>
-        </div>
-
-        <div *ngIf="isControlModified('password')">
-            <div *ngIf="registerForm.controls['password'].errors?.['required']">
-                Password is required.
-            </div>
-
-            <div *ngIf="registerForm.controls['password'].errors?.['minlength']">
-                Password must be at least 6 characters long.
-            </div>
-
-            <div *ngIf="registerForm.controls['password'].errors?.['maxlength']">
-                Password cannot be more than 20 characters long.
-            </div>
-        </div>
-
-        <div *ngIf="isControlModified('confirmPassword') && !passordsAreEqual">
-            Passwords do not match.
-        </div>
-
-        <div *ngIf="status === Status.Error" [ngSwitch]="error.code">
-            <div *ngSwitchCase="'auth/network-request-failed'">
-                Network request failed.
-            </div>
-
-            <div *ngSwitchCase="'auth/email-already-in-use'">
-                Email is already in use.
-            </div>
-
-            <div *ngSwitchDefault>
-                {{errorMessage}}
-            </div>
-        </div>
-
-        <div *ngIf="status === Status.Loading">
-            Loading.
-        </div>
-
-        <button type="submit" [disabled]="registerForm.invalid || !passordsAreEqual">
-            Register
-        </button><br>
-        <button routerLink="/auth/login">Return to login</button>
-    </form>
-</ng-template>
+        <mat-card-footer>
+            <mat-progress-bar *ngIf="status === Status.Loading" mode="indeterminate"></mat-progress-bar>
+        </mat-card-footer>
+    </mat-card>
+</div>
