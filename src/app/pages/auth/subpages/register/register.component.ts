@@ -23,7 +23,7 @@ export class RegisterComponent {
   registerForm = new FormGroup({
     email: new FormControl(''),
     password: new FormControl(''),
-    confirmPassword: new FormControl('', [this.passwordsEqualValidator()]),
+    confirmPassword: new FormControl(''),
   })
 
   constructor(public auth: AuthService) { }
@@ -49,12 +49,7 @@ export class RegisterComponent {
 
   get passordsAreEqual() {
     if(this.registerForm === undefined)  return false
+    console.log(this.registerForm.value.password, this.registerForm.value.confirmPassword)
     return this.registerForm.value.password === this.registerForm.value.confirmPassword
-  }
-
-  passwordsEqualValidator(): ValidatorFn {
-    return (control: AbstractControl): ValidationErrors | null => {
-      return this.passordsAreEqual ? null : {passwordsNotEqual: true};
-    };
   }
 }

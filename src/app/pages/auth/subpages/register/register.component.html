@@ -41,13 +41,10 @@
                 <mat-form-field class="form-field" appearance="outline">
                     <mat-label>Confirm password</mat-label>
                     <input matInput type="password" placeholder="Confirm password" formControlName="confirmPassword" required>
-                    <mat-error *ngIf="registerForm.controls['confirmPassword'].errors?.['passwordsNotEqual']">
-                        Passwords do not match
-                    </mat-error>
                 </mat-form-field>
                 <br>
 
-                <div *ngIf="status === Status.Error" [ngSwitch]="error.code">
+                <div *ngIf="status === Status.Error" [ngSwitch]="error.code" class="error-box">
                     <div *ngSwitchCase="'auth/network-request-failed'">
                         Network request failed.
                     </div>
