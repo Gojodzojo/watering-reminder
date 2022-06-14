@@ -20,3 +20,11 @@ The ui for this project is built with Angular. The ui is being designed using [F
 | Design ui in Figma                                               |     In progress |
 | Apply styles to application                                      |     In progress |
 | Add app to Google Play as TWA                                    | Not yet started |
+
+## Other informations
+
+This favicon was generated using the following font:
+- Font Title: Fascinate
+- Font Author: Copyright (c) 2011 by Brian J. Bonislawsky DBA Astigmatic (AOETI) (astigma@astigmatic.com), with Reserved Font Name "Fascinate"
+- Font Source: http://fonts.gstatic.com/s/fascinate/v21/z7NWdRrufC8XJK0IIEli1LbQRPyNrw.ttf
+- Font License: SIL Open Font License, 1.1 (http://scripts.sil.org/OFL))
