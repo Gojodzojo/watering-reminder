@@ -1,6 +1,14 @@
 import { Component } from '@angular/core'
 import { FormControl } from '@angular/forms'
+import errorCodeToMessage from 'src/app/scripts/errorCodeToMessage'
 import { AuthService } from 'src/app/services/auth/auth.service'
+
+enum Status {
+  WaitingForInput,
+  Loading,
+  Error,
+  Success
+}
 
 @Component({
   selector: 'app-forgot-password',
@@ -8,7 +16,9 @@ import { AuthService } from 'src/app/services/auth/auth.service'
   styleUrls: ['./forgot-password.component.scss']
 })
 export class ForgotPasswordComponent {
-  success = false
+  Status = Status
+  status = Status.WaitingForInput
+  error: any = null
 
   emailForm = new FormControl('')
 
@@ -16,8 +26,19 @@ export class ForgotPasswordComponent {
 
   async onSubmit() {
     if (this.emailForm.valid) {
-      await this.auth.sendPasswordResetEmail(this.emailForm.value)
-      this.success = true
+      try {
+        this.status = Status.Loading
+        await this.auth.sendPasswordResetEmail(this.emailForm.value)
+        this.status = Status.Success
+      } catch (error) {
+        console.error(error)
+        this.status = Status.Error
+        this.error = error
+      }
     }
+  }
+
+  get errorMessage() {
+    return errorCodeToMessage(this.error.code)
   }
 }

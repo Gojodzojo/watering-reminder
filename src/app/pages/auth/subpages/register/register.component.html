@@ -65,10 +65,6 @@
                     </div>
                 </div>
 
-                <div *ngIf="status === Status.Loading">
-                    Loading.
-                </div>
-
                 <button type="submit" [disabled]="registerForm.invalid || !passordsAreEqual" mat-flat-button color="primary" class="register-button">
                     Register
                 </button>
