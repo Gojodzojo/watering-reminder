@@ -16,7 +16,7 @@
             <div *ngIf="plantsService.plantsAreEmpty$ | async; then plantsEmptyBlock else plantsNotEmptyBlock"></div>
 
             <ng-template #plantsEmptyBlock>
-                <button mat-raised-button color="primary" routerLink="/logged-in/add-plant" class="first-plant-button">Add your first plant</button>
+                <button mat-raised-button color="accent" routerLink="/logged-in/add-plant" class="first-plant-button">Add your first plant</button>
             </ng-template>
 
             <ng-template #plantsNotEmptyBlock>
@@ -24,7 +24,7 @@
                 </app-plants-list-element>
             </ng-template>
         </ng-template>
-        <button mat-fab color="primary" aria-label="Icon button with an add icon" class="add-button" routerLink="/logged-in/add-plant">
+        <button mat-fab color="accent" aria-label="Icon button with an add icon" class="add-button" routerLink="/logged-in/add-plant">
             <mat-icon>add</mat-icon>
         </button>
     </ng-template>
