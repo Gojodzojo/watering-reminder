@@ -1,0 +1,12 @@
+<div class="unverified">
+    <mat-card class="card">
+        <mat-card-title class="title">Unverified account</mat-card-title>
+        <mat-card-content class="content">
+            <p>You have not verified your account yet. Please check your email for a verification link.</p>
+        </mat-card-content>
+        <div class="buttons-container">
+            <button mat-button (click)="auth.sendEmailVerification()">Send new verification email</button>
+            <button mat-button (click)="returnToLogin()">Return to login</button>
+        </div>
+    </mat-card>
+</div>

@@ -1,0 +1,31 @@
+<div class="dashboard">
+    <div *ngIf="notificationsService.areNotificationsAllowed; then notificationsAllowedBlock else notificationsNotAllowedBlock"></div>
+
+    <ng-template #notificationsNotAllowedBlock>
+        <p>You have to allow push notifications to use this app.</p>
+    </ng-template>
+
+    <ng-template #notificationsAllowedBlock>
+        <div *ngIf="isLoading; then loadingBlock else loadedBlock"></div>
+
+        <ng-template #loadingBlock>
+            <mat-spinner></mat-spinner>
+        </ng-template>
+
+        <ng-template #loadedBlock>
+            <div *ngIf="plantsService.plantsAreEmpty$ | async; then plantsEmptyBlock else plantsNotEmptyBlock"></div>
+
+            <ng-template #plantsEmptyBlock>
+                <button mat-raised-button color="accent" routerLink="/logged-in/add-plant" class="first-plant-button">Add your first plant</button>
+            </ng-template>
+
+            <ng-template #plantsNotEmptyBlock>
+                <app-plants-list-element *ngFor="let plant of plantsService.plants$ | async" [plant]="plant">
+                </app-plants-list-element>
+            </ng-template>
+        </ng-template>
+        <button mat-fab color="accent" aria-label="Icon button with an add icon" class="add-button" routerLink="/logged-in/add-plant">
+            <mat-icon>add</mat-icon>
+        </button>
+    </ng-template>
+</div>

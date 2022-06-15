@@ -25,8 +25,8 @@ export const sendPush = pubsub.schedule("every 1 minutes").onRun(async () => {
           notification: {
             title: `It's time to water ${plantData.name}`,
             body: plantData.description,
-            image: plantData.imageUrl ? plantData.imageUrl : "https://watering-reminder.web.app/assets/images/default_plant_image.png",
-            icon: "https://watering-reminder.web.app/assets/icons/icon-144x144.png",
+            image: plantData.imageUrl ? plantData.imageUrl : "https://watering-reminder.web.app/assets/images/default_plant_image.svg",
+            icon: "https://watering-reminder.web.app/assets/icons/android-chrome-192x192.png",
           },
         };
 

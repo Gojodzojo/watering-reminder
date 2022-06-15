@@ -1,0 +1,7 @@
+<mat-toolbar color="primary">
+    <span class="logo" routerLink="/">Watering Reminder</span>
+    <div class="spacer"></div>
+    <button mat-icon-button aria-label="Logout button" (click)="logout()" *ngIf="showLogoutButton">
+        <mat-icon>logout</mat-icon>
+    </button>
+</mat-toolbar>

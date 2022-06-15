@@ -1,0 +1,59 @@
+<div class="login">
+    <mat-card class="card">
+        <mat-card-title class="title">Login with email</mat-card-title>
+    
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="form">
+            <mat-form-field class="form-field" appearance="outline">
+                <mat-label>Email</mat-label>
+                <input matInput type="email" placeholder="Email" formControlName="email" required email>
+            </mat-form-field>
+            <br>
+    
+            <mat-form-field class="form-field" appearance="outline">
+                <mat-label>Password</mat-label>
+                <input matInput type="password" placeholder="Password" formControlName="password" required minlength="6" maxlength="20">
+            </mat-form-field>
+            <br>
+    
+            <div *ngIf="status === Status.Error && error !== null" [ngSwitch]="error.code" class="error-box">
+                <div *ngSwitchCase="'auth/user-not-found'">
+                    User not found.
+                </div>
+    
+                <div *ngSwitchCase="'auth/wrong-password'">
+                    Wrong password.
+                </div>
+    
+                <div *ngSwitchCase="'auth/network-request-failed'">
+                    Network request failed.
+                </div>
+    
+                <div *ngSwitchDefault>
+                    {{errorCodeToMessage()}}
+                </div>
+            </div>
+    
+            <button mat-flat-button color="accent" type="submit" [disabled]="loginForm.invalid" class="login-button">Login</button>
+        </form>
+    
+        <div class="account-buttons">
+            <button mat-button routerLink="/auth/forgot-password">Forgot password?</button>
+            <button mat-button color="primary" routerLink="/auth/register">Create a new account</button>
+        </div>
+    
+        <mat-divider inset></mat-divider>
+    
+        <div class="login-with-buttons">
+            <button mat-fab (click)="googleSignin()" class="google-button">
+                <img src="assets/icons8-google.svg" alt="Google logo">
+            </button>
+            <button mat-fab (click)="facebookSignin()" class="facebook-button">
+                <mat-icon>facebook</mat-icon>
+            </button>
+        </div>
+
+        <mat-card-footer>
+            <mat-progress-bar *ngIf="status === Status.Loading" mode="indeterminate"></mat-progress-bar>
+        </mat-card-footer>
+    </mat-card>
+</div>

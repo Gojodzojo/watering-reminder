@@ -1,0 +1,11 @@
+@use '@angular/material' as mat;
+
+.plant-list-element {
+    @include mat.elevation(12);
+    overflow-wrap: break-word;
+    width: 250px;
+}
+
+.description {
+    height: 60px;
+}

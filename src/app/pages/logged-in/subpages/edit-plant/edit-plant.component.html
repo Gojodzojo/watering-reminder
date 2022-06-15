@@ -1,0 +1,35 @@
+<div class="edit-plant">
+    <div *ngIf="editPlantState === EditPlantState.LoadingPage; then loadingBlock else formBlock"></div>
+
+    <ng-template #loadingBlock>
+        <mat-spinner></mat-spinner>
+    </ng-template>
+
+    <ng-template #formBlock>
+        <mat-card class="card">
+            <mat-card-title class="title">Edit plant</mat-card-title>
+            <app-plant-form [formGroup]="form" [(imageUrl)]="imageUrl" [(isCropping)]="isCropping"></app-plant-form>
+            <br>
+            <div class="action-buttons">
+                <button mat-stroked-button color="primary" (click)="deletePlant()">Delete plant</button>
+                <button mat-stroked-button color="primary" routerLink="/logged-in/dashboard">Cancel</button>
+                <button mat-flat-button color="accent" [disabled]="!canUpdatePlant" (click)="updatePlant()">Update plant</button>
+            </div>
+            <br>
+            
+            <div *ngIf="editPlantState === EditPlantState.UpdatingError">
+                <p>Error adding plant</p>
+            </div>
+
+            <div *ngIf="editPlantState === EditPlantState.DeletingError">
+                <p>Error deleting plant</p>
+            </div>
+        <mat-card-footer>
+            <mat-progress-bar
+                *ngIf="editPlantState === EditPlantState.UpdatingPlant || editPlantState === EditPlantState.DeletingPlant"
+                mode="indeterminate">
+            </mat-progress-bar>
+        </mat-card-footer>
+        </mat-card>
+    </ng-template>
+</div>

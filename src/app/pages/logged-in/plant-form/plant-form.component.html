@@ -1,0 +1,76 @@
+
+<form [formGroup]="form">
+    <mat-form-field class="form-field" appearance="outline">
+        <mat-label>Plant name</mat-label>
+        <input matInput type="text" placeholder="Plant name" formControlName="name" required>
+        <mat-error *ngIf="isInvalid('name')">
+            Plant name is required
+        </mat-error>
+    </mat-form-field>
+    <br>
+
+    <mat-form-field class="form-field" appearance="outline">
+        <mat-label>Plant description</mat-label>
+        <textarea matInput formControlName="description" placeholder="Plant description" rows="4" cols="50" style="resize: none;"></textarea>
+    </mat-form-field>
+    <br>
+
+    <mat-form-field class="form-field" appearance="outline">
+        <mat-label>Watering time</mat-label>
+        <input matInput type="time" formControlName="waterTime" required><br>
+        <mat-error *ngIf="isInvalid('waterTime')">
+            Watering time is required
+        </mat-error>
+    </mat-form-field>
+    <br>
+
+    <mat-form-field class="form-field" appearance="outline">
+        <mat-label>Timezone</mat-label>
+        <mat-select formControlName="timezone" required>
+          <mat-option *ngFor="let timezone of timezones" [value]="timezone">
+            {{timezone}}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="isInvalid('timezone')">
+            Timezone is required.
+        </mat-error>
+    </mat-form-field>
+    <br>
+
+    <div class="image-container">
+        <div *ngIf="!isCropping">
+            <img [src]="plantImageUrl" class="plant-image"/>
+        </div>
+        
+        <div *ngIf="isCropping">
+            <image-cropper
+                [imageChangedEvent]="imageChangedEvent"
+                [maintainAspectRatio]="true"
+                [resizeToWidth]="500"
+                [ngStyle]="{'height': '300px'}"
+                [cropperMinWidth]="100"
+                [cropperMinHeight]="100"
+                (imageCropped)="imageCropped($event)"
+                (loadImageFailed)="loadImageFailed()"
+                format="png">
+            </image-cropper>
+        </div>
+    </div>
+
+    <div class="buttons-container">
+        <div *ngIf="!isCropping">
+            <button mat-button type="button">
+                <label>
+                    Change image
+                    <input type="file" accept="image/*" 
+                    (change)="fileChangeEvent($event)" style="display: none">
+                </label>
+            </button>
+            <button mat-button *ngIf="imageUrl" (click)="clearImage()">Clear image</button><br>
+        </div>
+    
+        <div *ngIf="isCropping">
+            <button mat-button (click)="acceptCropping()">Accept</button>
+        </div>
+    </div>
+</form>

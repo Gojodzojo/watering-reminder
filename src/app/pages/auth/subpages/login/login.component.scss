@@ -1,0 +1,71 @@
+@use '@angular/material' as mat;
+
+.login {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    overflow: auto;
+    gap: 25px;
+    padding: 25px;
+    box-sizing: border-box;
+
+    &::-webkit-scrollbar {
+        width: 5px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background-color: #aaaaaa;
+        border-radius: 5px;
+    }
+}
+
+.title {
+    margin: 20px !important;
+}
+
+.card {
+    @include mat.elevation(12);
+    width: 80%;
+    max-width: 500px;
+}
+
+.account-buttons {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin: 10px;
+}
+
+.form {
+    margin: 0 20px;
+}
+
+.form-field, .login-button {
+    width: 100%;
+}
+
+.login-with-buttons {
+    display: flex;
+    justify-content: center;
+    margin: 10px;
+
+    button {
+        margin: 10px;
+    }
+}
+
+.google-button {
+    background-color: #f04434;
+}
+
+.facebook-button {
+    background-color: #4267B2;
+}
+
+.error-box {
+    color: red;
+    margin-bottom: 20px;
+}

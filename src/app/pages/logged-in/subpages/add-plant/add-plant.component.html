@@ -1,0 +1,21 @@
+<div class="add-plant">
+    <mat-card class="card">
+        <mat-card-title class="title">Add a plant</mat-card-title>
+        <div class="form">
+            <app-plant-form [formGroup]="form" [(imageUrl)]="imageUrl" [(isCropping)]="isCropping"></app-plant-form>
+            <br>
+            <div class="action-buttons">
+                <button mat-stroked-button color="primary" routerLink="/logged-in/dashboard">Cancel</button>
+                <button mat-flat-button color="accent" [disabled]="!canAddPlant" (click)="addPlant()" class="add-plant-button">Add plant</button>
+            </div>
+            <br>
+            
+            <div *ngIf="addPlantState === AddPlantState.Error">
+                <p>Error adding plant</p>
+            </div>
+        </div>
+        <mat-card-footer>
+            <mat-progress-bar *ngIf="addPlantState === AddPlantState.Loading" mode="indeterminate"></mat-progress-bar>
+        </mat-card-footer>
+    </mat-card>
+</div>
