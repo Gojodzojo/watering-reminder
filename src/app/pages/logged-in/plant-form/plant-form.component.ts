@@ -56,6 +56,6 @@ export class PlantFormComponent implements OnInit {
   }
 
   get plantImageUrl() {
-    return this.imageUrl ? this.imageUrl : 'assets/images/default_plant_image.png'
+    return this.imageUrl ? this.imageUrl : 'assets/images/default_plant_image.svg'
   }
 }

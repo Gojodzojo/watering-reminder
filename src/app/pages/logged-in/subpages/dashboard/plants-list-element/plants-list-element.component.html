@@ -3,7 +3,7 @@
     <mat-card-title>{{ plant.name }}</mat-card-title>
     <mat-card-subtitle>Watering time: {{ plant.waterTime }}</mat-card-subtitle>
   </mat-card-header>
-  <img mat-card-image [src]="plant.imageUrl ? plant.imageUrl : 'assets/images/default_plant_image.png'" alt="Plant image" style="aspect-ratio: 1 / 1;" >
+  <img mat-card-image [src]="plant.imageUrl ? plant.imageUrl : 'assets/images/default_plant_image.svg'" alt="Plant image" style="aspect-ratio: 1 / 1;" >
   <mat-card-content>
     <p class="description">{{ plant.description }}</p>
   </mat-card-content>
