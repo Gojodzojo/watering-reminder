@@ -17,11 +17,11 @@ The ui for this project is built with Angular. The ui is being designed using [F
 | Create a login and registration page.                            |            Done |
 | Create page to manage your plants.                               |            Done |
 | Create scheduled functions on backend to send push notifications |            Done |
-| Design ui in Figma                                               |     In progress |
-| Apply styles to application                                      |     In progress |
+| Design ui in Figma                                               |            Done |
+| Apply styles to application                                      |            Done |
 | Add app to Google Play as TWA                                    | Not yet started |
 
-## Other informations
+## Other information
 
 This favicon was generated using the following font:
 - Font Title: Fascinate
